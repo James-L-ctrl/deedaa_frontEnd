@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 
 export function PreOrderBanner() {
   return (
@@ -31,13 +32,15 @@ export function PreOrderBanner() {
           <p className="font-['Inter'] text-white/90 text-lg mb-10 max-w-2xl mx-auto font-light leading-relaxed">
             Be the first to experience our newest formulations. Sign up to get notified when pre-orders open.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-[#D4A5A5] hover:bg-white/95 px-12 py-4 rounded-full font-['Inter'] tracking-wider transition-all duration-300 shadow-xl hover:shadow-2xl"
-          >
-            Notify Me
-          </motion.button>
+          <Link to="/shop/crystal-dew-essence">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-[#D4A5A5] hover:bg-white/95 px-12 py-4 rounded-full font-['Inter'] tracking-wider transition-all duration-300 shadow-xl hover:shadow-2xl"
+            >
+              Pre-order Crystal Dew
+            </motion.button>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

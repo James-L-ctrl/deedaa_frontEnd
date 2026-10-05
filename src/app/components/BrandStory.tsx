@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function BrandStory() {
@@ -47,13 +48,15 @@ export function BrandStory() {
                 Our commitment is to modern femininity—soft, strong, and unapologetically you.
               </p>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-10 bg-transparent border-2 border-[#E5B4B4] text-[#D4A5A5] hover:bg-[#E5B4B4] hover:text-white px-10 py-3 rounded-full font-['Inter'] text-sm tracking-wider transition-all duration-300"
-            >
-              Learn More
-            </motion.button>
+            <Link to="/about">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mt-10 bg-transparent border-2 border-[#E5B4B4] text-[#D4A5A5] hover:bg-[#E5B4B4] hover:text-white px-10 py-3 rounded-full font-['Inter'] text-sm tracking-wider transition-all duration-300"
+              >
+                Learn More
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </div>

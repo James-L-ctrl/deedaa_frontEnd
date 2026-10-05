@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hero() {
@@ -37,13 +38,15 @@ export function Hero() {
               Strong on confidence.
             </p>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#E5B4B4] hover:bg-[#D4A5A5] text-white px-12 py-4 rounded-full font-['Inter'] font-light tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Discover Collection
-            </motion.button>
+            <Link to="/shop">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#E5B4B4] hover:bg-[#D4A5A5] text-white px-12 py-4 rounded-full font-['Inter'] font-light tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Discover Collection
+              </motion.button>
+            </Link>
           </motion.div>
 
           {/* Image */}

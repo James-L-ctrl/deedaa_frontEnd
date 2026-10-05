@@ -1,12 +1,14 @@
 import { motion } from 'motion/react';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X, User } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { state } = useCart();
+  const { totalItems } = useCart();
+  const { user } = useAuth();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#FFE4E6]/30">
@@ -33,15 +35,15 @@ export function Navigation() {
             <Link to="/shop" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
               Shop
             </Link>
-            <a href="#" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
+            <Link to="/about" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
               About
-            </a>
-            <a href="#" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
+            </Link>
+            <Link to="/ingredients" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
               Ingredients
-            </a>
-            <a href="#" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
+            </Link>
+            <Link to="/journal" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide">
               Journal
-            </a>
+            </Link>
           </motion.div>
 
           {/* Cart & Mobile Menu */}
@@ -51,6 +53,16 @@ export function Navigation() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4"
           >
+            <Link to={user ? '/account' : '/login'} aria-label={user ? 'Account' : 'Login'}>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2"
+              >
+                <User className="w-5 h-5 text-[#4A3F3F]" />
+              </motion.button>
+            </Link>
+
             <Link to="/cart">
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -59,7 +71,7 @@ export function Navigation() {
               >
                 <ShoppingBag className="w-5 h-5 text-[#4A3F3F]" />
                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#E5B4B4] rounded-full flex items-center justify-center text-white text-xs">
-                  {state.totalItems}
+                  {totalItems}
                 </span>
               </motion.button>
             </Link>
@@ -90,15 +102,18 @@ export function Navigation() {
               <Link to="/shop" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
                 Shop
               </Link>
-              <a href="#" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
+              <Link to="/about" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
                 About
-              </a>
-              <a href="#" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
+              </Link>
+              <Link to="/ingredients" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
                 Ingredients
-              </a>
-              <a href="#" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
+              </Link>
+              <Link to="/journal" className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
                 Journal
-              </a>
+              </Link>
+              <Link to={user ? '/account' : '/login'} className="font-['Inter'] text-[#4A3F3F] hover:text-[#D4A5A5] transition-colors text-sm tracking-wide py-2">
+                {user ? 'Account' : 'Login'}
+              </Link>
             </div>
           </motion.div>
         )}

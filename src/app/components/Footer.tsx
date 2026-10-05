@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
@@ -48,10 +49,10 @@ export function Footer() {
           <div>
             <h4 className="font-['Inter'] text-white mb-4 tracking-wider uppercase text-sm">Shop</h4>
             <ul className="space-y-3 font-['Inter'] text-white/70 font-light">
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">All Products</a></li>
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">Best Sellers</a></li>
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">New Arrivals</a></li>
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">Bundles</a></li>
+              <li><Link to="/shop" className="hover:text-[#E5B4B4] transition-colors">All Products</Link></li>
+              <li><Link to="/shop" className="hover:text-[#E5B4B4] transition-colors">Best Sellers</Link></li>
+              <li><Link to="/shop" className="hover:text-[#E5B4B4] transition-colors">New Arrivals</Link></li>
+              <li><Link to="/shop/crystal-dew-essence" className="hover:text-[#E5B4B4] transition-colors">Pre-order</Link></li>
             </ul>
           </div>
 
@@ -59,10 +60,10 @@ export function Footer() {
           <div>
             <h4 className="font-['Inter'] text-white mb-4 tracking-wider uppercase text-sm">Support</h4>
             <ul className="space-y-3 font-['Inter'] text-white/70 font-light">
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">FAQs</a></li>
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">Shipping</a></li>
-              <li><a href="#" className="hover:text-[#E5B4B4] transition-colors">Returns</a></li>
+              <li><Link to="/contact" className="hover:text-[#E5B4B4] transition-colors">Contact Us</Link></li>
+              <li><Link to="/shipping" className="hover:text-[#E5B4B4] transition-colors">Shipping</Link></li>
+              <li><Link to="/shipping" className="hover:text-[#E5B4B4] transition-colors">Returns</Link></li>
+              <li><Link to="/account" className="hover:text-[#E5B4B4] transition-colors">Your orders</Link></li>
             </ul>
           </div>
         </div>
@@ -73,8 +74,8 @@ export function Footer() {
             © 2026 deedaa. All rights reserved.
           </p>
           <div className="flex gap-6 font-['Inter'] text-white/60 text-sm font-light">
-            <a href="#" className="hover:text-[#E5B4B4] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#E5B4B4] transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="hover:text-[#E5B4B4] transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#E5B4B4] transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
