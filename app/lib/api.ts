@@ -54,7 +54,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: 'USER' | 'ADMIN';
+  role: 'CUSTOMER' | 'ADMIN';
 }
 
 export interface Product {
@@ -186,6 +186,12 @@ export const productsApi = {
 
   create: (data: CreateProductDto) =>
     request<Product>('/products', { method: 'POST', body: JSON.stringify(data) }),
+
+  update: (id: string, data: Partial<CreateProductDto>) =>
+    request<Product>(`/products/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+
+  delete: (id: string) =>
+    request<{ ok: true }>(`/products/${id}`, { method: 'DELETE' }),
 };
 
 // Cart
