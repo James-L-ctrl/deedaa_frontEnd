@@ -1,7 +1,35 @@
 // API Client for DeaWeb E-commerce Frontend
 // Matches the NestJS backend API at /api prefix
 
-const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
+const CONFIGURED_API_BASE = import.meta.env.VITE_API_URL ?? '/api';
+
+/**
+ * Loaders and actions are also executed on the server during SSR, where a
+ * relative URL like `/api/products` has no origin to resolve against. Fall
+ * back to an absolute origin for those requests.
+ */
+function resolveServerApiBase(): string {
+  if (/^https?:\/\//i.test(CONFIGURED_API_BASE)) {
+    return CONFIGURED_API_BASE;
+  }
+  const origin =
+    process.env.SERVER_API_URL ??
+    `http://127.0.0.1:${process.env.PORT ?? '3001'}`;
+  const path = CONFIGURED_API_BASE.startsWith('/')
+    ? CONFIGURED_API_BASE
+    : `/${CONFIGURED_API_BASE}`;
+  return `${origin}${path}`;
+}
+
+const API_BASE =
+  typeof window === 'undefined' ? resolveServerApiBase() : CONFIGURED_API_BASE;
+
+// On the server `fetch` has no document to resolve against, so fall back to
+// the configured API origin instead of `window.location.origin`.
+const ORIGIN =
+  typeof window === 'undefined'
+    ? new URL(API_BASE).origin
+    : window.location.origin;
 
 type RequestOptions = RequestInit & {
   params?: Record<string, string | number | boolean | undefined>;
@@ -10,7 +38,7 @@ type RequestOptions = RequestInit & {
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { params, headers, ...fetchOptions } = options;
 
-  const url = new URL(`${API_BASE}${path}`, window.location.origin);
+  const url = new URL(`${API_BASE}${path}`, ORIGIN);
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
@@ -94,9 +122,24 @@ export interface OrderItem {
   quantity: number;
 }
 
+export type OrderStatus =
+  | 'PENDING'
+  | 'PAID'
+  | 'COD_PENDING'
+  | 'COD_CONFIRMED'
+  | 'COD_DELIVERED'
+  | 'COD_CANCELLED'
+  | 'GCASH_PENDING'
+  | 'GCASH_COMPLETED'
+  | 'GCASH_FAILED'
+  | 'GCASH_CANCELLED'
+  | 'REFUNDED'
+  | 'PARTIALLY_REFUNDED';
+
 export interface Order {
   id: string;
   userId: string;
+  status: OrderStatus;
   subtotalCents: number;
   shippingCents: number;
   totalCents: number;
@@ -105,6 +148,10 @@ export interface Order {
   shippingCity: string;
   shippingPostalCode: string;
   shippingCountry: string;
+  paymentMethod: 'COD' | 'GCASH';
+  gcashReferenceId?: string | null;
+  codReferenceId?: string | null;
+  paidAt?: string | null;
   items: OrderItem[];
   createdAt: string;
   updatedAt: string;
@@ -155,6 +202,7 @@ export interface CheckoutDto {
   shippingCity: string;
   shippingPostalCode: string;
   shippingCountry: string;
+  paymentMethod: 'COD' | 'GCASH';
 }
 
 export interface NewsletterSubscribeDto {
