@@ -8,7 +8,7 @@ interface QuantitySelectorProps {
   max?: number;
   className?: string;
   disabled?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'default' | 'lg' | 'xl' | 'icon';
 }
 
 export function QuantitySelector({
@@ -18,7 +18,7 @@ export function QuantitySelector({
   max = 20,
   className,
   disabled,
-  size = 'md',
+  size = 'default',
 }: QuantitySelectorProps) {
   const handleIncrement = () => {
     if (value < max) {
@@ -41,21 +41,25 @@ export function QuantitySelector({
 
   const sizeClasses = {
     sm: 'h-8 w-16 text-xs',
-    md: 'h-10 w-20 text-sm',
+    default: 'h-10 w-20 text-sm',
     lg: 'h-12 w-24 text-base',
+    xl: 'h-14 w-28 text-lg',
+    icon: 'h-10 w-10',
   };
 
   const buttonSize = {
     sm: 'h-8 w-8',
-    md: 'h-10 w-10',
+    default: 'h-10 w-10',
     lg: 'h-12 w-12',
+    xl: 'h-14 w-14',
+    icon: 'h-10 w-10',
   };
 
   return (
     <div className={cn('flex items-center gap-1', className)}>
       <Button
         variant="outline"
-        size={size as 'sm' | 'md' | 'lg'}
+        size={size}
         className={cn(buttonSize[size])}
         onClick={handleDecrement}
         disabled={disabled || value <= min}
@@ -84,7 +88,7 @@ export function QuantitySelector({
       />
       <Button
         variant="outline"
-        size={size as 'sm' | 'md' | 'lg'}
+        size={size}
         className={cn(buttonSize[size])}
         onClick={handleIncrement}
         disabled={disabled || value >= max}

@@ -1,7 +1,6 @@
 'use client';
 
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { ChevronDown, ChevronUp, Check } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 const Select = SelectPrimitive.Root;

@@ -6,11 +6,11 @@ export type Product = {
   priceCents: number;
   imageUrl: string;
   category: string;
-  rating: number;
+  rating?: number;
   stock: number;
   featured: boolean;
   bestseller: boolean;
-  badge: string | null;
+  badge?: string;
   isPreorder: boolean;
 };
 
@@ -39,7 +39,12 @@ export type Order = {
   shippingCents: number;
   totalCents: number;
   shippingName: string;
+  paymentMethod?: 'COD' | 'GCASH';
+  gcashReferenceId?: string | null;
+  codReferenceId?: string | null;
+  paidAt?: string | null;
   createdAt: string;
+  updatedAt?: string;
   items: Array<{
     id: string;
     name: string;

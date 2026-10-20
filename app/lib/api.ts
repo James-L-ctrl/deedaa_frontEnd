@@ -32,7 +32,7 @@ const ORIGIN =
     : window.location.origin;
 
 type RequestOptions = RequestInit & {
-  params?: Record<string, string | number | boolean | undefined>;
+  params?: Partial<Record<string, string | number | boolean | undefined>>;
 };
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
@@ -166,6 +166,7 @@ export interface ProductQuery {
   page?: number;
   limit?: number;
   sort?: 'price_asc' | 'price_desc' | 'newest' | 'featured';
+  [key: string]: string | number | boolean | undefined;
 }
 
 export interface CreateProductDto {

@@ -23,7 +23,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const user = await login({ email, password });
+      const user = await login(email, password);
       if (user.role === "ADMIN") {
         navigate("/admin");
       } else {

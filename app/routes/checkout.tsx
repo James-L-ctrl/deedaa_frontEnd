@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLoaderData, useNavigation, Link, Form, redirect, useActionData } from "react-router";
-import { cartApi, ordersApi, formatPrice, CheckoutDto } from "../lib/api";
+import { cartApi, ordersApi, formatPrice, type CheckoutDto } from "../lib/api";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";

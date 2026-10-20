@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import { Cart, Heart, Eye } from 'lucide-react';
-import { Product } from '../../lib/api';
+import { Heart, Eye } from "lucide-react";
+import type { Product } from '../../lib/api';
 import { Button } from './button';
 import { Badge } from './badge';
 import { PriceDisplay } from './price-display';

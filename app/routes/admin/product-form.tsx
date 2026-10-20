@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate, useParams, useActionData } from "react-router";
 import { productsApi, formatPrice } from "../../lib/api";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Textarea } from "../components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
-import { Checkbox } from "../components/ui/checkbox";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Textarea } from "../../components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
+import { Checkbox } from "../../components/ui/checkbox";
 
 export async function loader({ params }: { params: { id?: string } }) {
   if (params.id) {
@@ -210,7 +210,7 @@ export default function ProductForm() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <Label htmlFor="category">Category</Label>
-            <Select value={formState.category} onValueChange={(value) => setFormState(prev => ({ ...prev, category: value }))}>
+            <Select value={formState.category} onValueChange={(value: string) => setFormState(prev => ({ ...prev, category: value }))}>
               <SelectTrigger className="mt-1">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
@@ -269,7 +269,7 @@ export default function ProductForm() {
               id="featured"
               name="featured"
               checked={formState.featured}
-              onCheckedChange={(checked) => setFormState(prev => ({ ...prev, featured: checked }))}
+              onCheckedChange={(checked: boolean | 'indeterminate') => setFormState(prev => ({ ...prev, featured: !!checked }))}
             />
             <Label htmlFor="featured" className="text-sm font-medium text-gray-700 dark:text-gray-300">Featured</Label>
           </div>
@@ -279,7 +279,7 @@ export default function ProductForm() {
               id="bestseller"
               name="bestseller"
               checked={formState.bestseller}
-              onCheckedChange={(checked) => setFormState(prev => ({ ...prev, bestseller: checked }))}
+              onCheckedChange={(checked: boolean | 'indeterminate') => setFormState(prev => ({ ...prev, bestseller: !!checked }))}
             />
             <Label htmlFor="bestseller" className="text-sm font-medium text-gray-700 dark:text-gray-300">Bestseller</Label>
           </div>
@@ -290,7 +290,7 @@ export default function ProductForm() {
             id="isPreorder"
             name="isPreorder"
             checked={formState.isPreorder}
-            onCheckedChange={(checked) => setFormState(prev => ({ ...prev, isPreorder: checked }))}
+            onCheckedChange={(checked: boolean | 'indeterminate') => setFormState(prev => ({ ...prev, isPreorder: !!checked }))}
           />
           <Label htmlFor="isPreorder" className="text-sm font-medium text-gray-700 dark:text-gray-300">Pre-order</Label>
         </div>

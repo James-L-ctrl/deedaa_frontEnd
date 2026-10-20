@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLoaderData, Link, Form, useSearchParams } from "react-router";
-import { productsApi, formatPrice, ProductQuery } from "../lib/api";
+import { productsApi, formatPrice } from "../lib/api";
+import type { ProductQuery } from "../lib/api";
 import { ProductCard } from "../components/ui/product-card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
